@@ -66,7 +66,7 @@ public class pelanggan {
         System.out.println("  Belum ada pesanan.");
         return;
     }
-    System.out.println("====== Daftar Pesanan Pelanggan =======");
+    System.out.println("Daftar Pesanan Pelanggan ID"+id);
     for (pesanan p : daftarPesanan) {
         p.tampilRingkasan();
     }

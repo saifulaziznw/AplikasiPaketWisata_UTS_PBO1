@@ -18,6 +18,24 @@ public class InputHelper {
             System.out.println("Input tidak boleh kosong! Coba lagi.");
         }
     }
+
+    public static String readString(String msg, boolean skip) {
+        String input;
+        while (true) {
+            System.out.print(msg);
+            input = sc.nextLine().trim();
+
+            if (!input.isEmpty()) {
+                return input;
+            } else {
+                if (skip) {
+                    return null;
+                }
+            }
+            System.out.println("Input error! Coba lagi.");
+        }
+    }
+
     public static String readStringSkipable(String msg, String oldValue) {
         System.out.print(msg + " (Lama: " + oldValue + ", Tekan Enter untuk skip): ");
         String input = sc.nextLine().trim();
@@ -37,7 +55,7 @@ public class InputHelper {
             System.out.println("Input tidak valid! Harus mudah, sedang, atau sulit.");
         }
     }
-    
+
     public static String readYT(String msg) {
         while (true) {
             String input = readString(msg).toLowerCase();
@@ -45,10 +63,10 @@ public class InputHelper {
                 return input;
             }
             // FIX KRITIS: Pesan error yang benar
-            System.out.println("Input tidak valid! Harus 'y' atau 't'."); 
+            System.out.println("Input tidak valid! Harus 'y' atau 't'.");
         }
     }
-    
+
     // NOTE: Method readInt dan readDouble reguler TIDAK DIUBAH karena sudah benar
     // (Mereka berfungsi untuk input wajib, bukan untuk input yang bisa di-skip).
     public static int readInt(String msg) {
@@ -89,7 +107,6 @@ public class InputHelper {
 
     // Method yang menyebabkan infinite loop (readIntUbahData, readDoubleUbahData, etc.) telah dihapus.
     // Logic parsing dan skip untuk UPDATE harus ditangani di menuAdmin.java.
-
     public static void pause() {
         System.out.print("Tekan ENTER untuk melanjutkan...");
         sc.nextLine();

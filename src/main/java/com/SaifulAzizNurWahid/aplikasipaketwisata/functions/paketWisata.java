@@ -42,7 +42,7 @@ public abstract class paketWisata {
     }
 
     public void tampilInfo() {
-        System.out.printf("ID:%d | %s | Rp %.2f | %d hari | %s | %s%n", id, nama, harga, durasiHari, lokasi,kontak);
+        System.out.printf("ID:%d | %s | Rp %.2f /orang | Durasi: %d hari | Lokasi: %s | Kontak: %s%n", id, nama, harga, durasiHari, lokasi,kontak);
     }
 
     public void updateData(String nama, double harga, int durasi, String lokasi,String kontak) {
