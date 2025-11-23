@@ -21,14 +21,13 @@ public class menuAdmin {
             System.out.println("1. Lihat Daftar Paket Wisata");
             System.out.println("2. Tambah Paket Wisata");
             System.out.println("3. Hapus Paket Wisata");
-            System.out.println("4. Cari Paket Wisata");
+            System.out.println("4. Cari Data (Paket/Pelanggan/Status)");
             System.out.println("5. Buat Pesanan untuk Pelanggan");
             System.out.println("6. Lihat Pelanggan & Pesanan");
-            System.out.println("7. Cari Pelanggan");
-            System.out.println("8. Ubah data Paket/Pesanan");
+            System.out.println("7. Ubah data Paket/Pesanan");
             System.out.println("0. Logout");
 
-            pilih = InputHelper.readInt("Masukkan angka 0-8: ");
+            pilih = InputHelper.readInt("Masukkan angka 0-7: ");
 
             switch (pilih) {
                 case 1:
@@ -41,7 +40,7 @@ public class menuAdmin {
                     hapusPaket();
                     break;
                 case 4:
-                    cariPaket();
+                    cariDataMenu();
                     break;
                 case 5:
                     pesanPaket();
@@ -66,6 +65,51 @@ public class menuAdmin {
         } while (pilih != 0);
     }
 
+    private void cariDataMenu() {
+        int pilih;
+        do {
+            System.out.println("\n===== Submenu Cari Data & Cek Status =====");
+            System.out.println("1. Cari Paket Wisata berdasarkan ID");
+            System.out.println("2. Cari Pelanggan & Pesanan berdasarkan ID");
+            System.out.println("3. Cek Status Pesanan berdasarkan Kode (UTS)");
+            System.out.println("0. Kembali ke Menu Utama");
+            
+            pilih = InputHelper.readInt("Masukkan pilihan (0-3): ");
+
+            switch (pilih) {
+                case 1:
+                    cariPaket();
+                    break;
+                case 2:
+                    cariPlg();
+                    break;
+                case 3:
+                    cekStatusPesanan();
+                    break;
+                case 0:
+                    break;
+                default:
+                    System.out.println("Pilihan tidak valid!");
+            }
+        } while (pilih != 0);
+    }
+    public void cekStatusPesanan() { 
+        System.out.println("\n============================================= Cek Status Pesanan ===================================================");
+        int kodePsn = InputHelper.readInt("Masukkan Kode Pesanan: ");
+        
+        for (pelanggan plg : daftarPelanggan) {
+            for (pesanan psn : plg.getDaftarPesanan()) { 
+                if (psn.getKodePesanan() == kodePsn) {
+                    System.out.println("===== Ditemukan pada Pelanggan ID: " + plg.getId() + " (" + plg.getNama() + ") =====");
+                    psn.tampilRingkasan();
+                    InputHelper.pause();
+                    return;
+                }
+            }
+        }
+        System.out.println("Pesanan dengan kode " + kodePsn + " tidak ditemukan.");
+        InputHelper.pause();
+    }
     public void menuUbahData() {
         int pilih;
         do {

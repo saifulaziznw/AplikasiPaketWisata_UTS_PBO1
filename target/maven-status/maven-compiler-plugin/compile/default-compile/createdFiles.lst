@@ -2,7 +2,6 @@ com\SaifulAzizNurWahid\aplikasipaketwisata\functions\paketWisata.class
 com\SaifulAzizNurWahid\aplikasipaketwisata\functions\wisataAlam.class
 com\SaifulAzizNurWahid\aplikasipaketwisata\helper\InputHelper.class
 com\SaifulAzizNurWahid\aplikasipaketwisata\menu\menuAdmin.class
-com\SaifulAzizNurWahid\aplikasipaketwisata\menu\menuUser.class
 com\SaifulAzizNurWahid\aplikasipaketwisata\functions\pesanan.class
 com\SaifulAzizNurWahid\aplikasipaketwisata\AplikasiPaketWisata.class
 com\SaifulAzizNurWahid\aplikasipaketwisata\functions\wisataBudaya.class
