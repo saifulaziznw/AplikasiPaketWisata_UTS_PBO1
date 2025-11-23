@@ -58,7 +58,7 @@ public class pelanggan {
     }
 
     public void tampilInfo() {
-        System.out.printf("ID:%-10d | %-15s | %-15s | %-15s%n", id, nama, kontak, alamat);
+        System.out.printf("ID:%d | %s | %s | %s%n", id, nama, kontak, alamat);
     }
 
     public void tampilPesanan() {
@@ -66,8 +66,7 @@ public class pelanggan {
         System.out.println("  Belum ada pesanan.");
         return;
     }
-    // Hapus baris System.out.printf("Pelanggan: %s (ID: %d)...")
-    System.out.println("  --- Daftar Pesanan Pelanggan ---");
+    System.out.println("====== Daftar Pesanan Pelanggan =======");
     for (pesanan p : daftarPesanan) {
         p.tampilRingkasan();
     }

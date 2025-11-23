@@ -46,6 +46,9 @@ public class pesanan {
         if (paket != null) {
             System.out.printf("Kode:%s | PaketID:%d - %s | Harga: Rp %.2f | Jumlah:%d | Status: %s%n",
                     kodePesanan, paket.getId(), paket.getNama(), paket.getHarga(), jumlahOrang, status);
+        } else {
+            System.out.printf("Kode:%s | PaketID: Dihapus/Tidak tersedia | Nama: N/A | Jumlah:%d | Status: %s%n",
+                    kodePesanan, jumlahOrang, status);
         }
     }
     public void updatePesanan(int newJumlahOrang, String newStatus) {

@@ -28,7 +28,7 @@ public class menuAdmin {
             System.out.println("8. Ubah data Paket/Pesanan");
             System.out.println("0. Logout");
 
-            pilih = InputHelper.readInt("Masukkan angka 0-7: ");
+            pilih = InputHelper.readInt("Masukkan angka 0-8: ");
 
             switch (pilih) {
                 case 1:
@@ -131,11 +131,23 @@ public class menuAdmin {
         System.out.println("===== Data Pesanan Saat Ini =====");
         targetPesanan.tampilRingkasan();
 
-        int newJumlah = InputHelper.readIntUbahJO("Jumlah Orang Baru",targetPesanan.getJumlahOrang(),0);
-        String newStatus = InputHelper.readStatusUbah("Status Baru",targetPesanan.getStatus());
+        int newJumlah = targetPesanan.getJumlahOrang();
+        String jumlahInput = InputHelper.readString("Jumlah Orang Baru (Lama: " + targetPesanan.getJumlahOrang() + ", Tekan Enter untuk skip): ").trim();
+        if (!jumlahInput.isEmpty()) {
+            try {
+                newJumlah = Integer.parseInt(jumlahInput);
+                if (newJumlah < 1) {
+                    System.out.println("Jumlah orang minimal 1. Menggunakan jumlah lama.");
+                    newJumlah = targetPesanan.getJumlahOrang();
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Input Jumlah Orang tidak valid. Menggunakan jumlah lama.");
+            }
+        }
 
+        String newStatus = InputHelper.readStringSkipable("Status Baru (e.g. Lunas, Pending, Batal)", targetPesanan.getStatus());
         targetPesanan.updatePesanan(newJumlah, newStatus);
-        
+
         System.out.println("===== Data Pesanan Baru =====");
         targetPesanan.tampilRingkasan();
         InputHelper.pause();
@@ -158,26 +170,64 @@ public class menuAdmin {
         System.out.println("===== Data Paket Saat Ini =====");
         target.tampilDetail();
 
-        String newNama = InputHelper.readStringUbahData("Nama Baru", target.getNama());
-        double newHarga = InputHelper.readDoubleUbahData("Harga Baru", target.getHarga());
-        int newDurasi = InputHelper.readIntUbahData("Durasi Hari Baru", target.getDurasiHari());
-        String newLokasi = InputHelper.readStringUbahData("Lokasi Baru", target.getLokasi());
-        String newKontak = InputHelper.readStringUbahData("Kontak Baru", target.getKontak());
+        String newNama = InputHelper.readStringSkipable("Nama Baru", target.getNama());
+        String newLokasi = InputHelper.readStringSkipable("Lokasi Baru", target.getLokasi());
+        String newKontak = InputHelper.readStringSkipable("Kontak Baru", target.getKontak());
+
+        double newHarga = target.getHarga();
+        String hargaInput = InputHelper.readString("Harga Baru (Lama: " + target.getHarga() + ", Tekan Enter untuk skip): ").trim();
+        if (!hargaInput.isEmpty()) {
+            try {
+                newHarga = Double.parseDouble(hargaInput);
+            } catch (NumberFormatException e) {
+                System.out.println("Input Harga tidak valid. Menggunakan harga lama.");
+            }
+        }
+
+        int newDurasi = target.getDurasiHari();
+        String durasiInput = InputHelper.readString("Durasi Hari Baru (Lama: " + target.getDurasiHari() + ", Tekan Enter untuk skip): ").trim();
+        if (!durasiInput.isEmpty()) {
+            try {
+                newDurasi = Integer.parseInt(durasiInput);
+            } catch (NumberFormatException e) {
+                System.out.println("Input Durasi tidak valid. Menggunakan durasi lama.");
+            }
+        }
+
         target.updateData(newNama, newHarga, newDurasi, newLokasi, newKontak);
 
-        if (target instanceof wisataAlam) {
-            wisataAlam wa = (wisataAlam) target;
-            String newTingkat = InputHelper.readTKUbah("Tingkat Kesulitan Baru", ((wisataAlam) target).getTingkatKesulitan());
-            boolean newGuide = InputHelper.readYTUbah("Informasi Guide Baru", ((wisataAlam) target).isAdaGuide());
-            String newFasilitas = InputHelper.readStringUbahData("Informasi Fasilitas Baru", ((wisataAlam) target).getFasilitas());
+        if (target instanceof wisataAlam wa) {
+            String newTingkat = wa.getTingkatKesulitan();
+            String tingkatInput = InputHelper.readString("Tingkat Kesulitan Baru (Lama: " + wa.getTingkatKesulitan() + ", Ketik 'mudah'/'sedang'/'sulit' atau Enter untuk skip): ").trim();
+            if (!tingkatInput.isEmpty()) {
+                if (tingkatInput.equalsIgnoreCase("mudah") || tingkatInput.equalsIgnoreCase("sedang") || tingkatInput.equalsIgnoreCase("sulit")) {
+                    newTingkat = tingkatInput;
+                } else {
+                    System.out.println("Input Tingkat Kesulitan tidak valid. Menggunakan nilai lama.");
+                }
+            }
+
+            boolean newGuide = wa.isAdaGuide();
+            String guideInput = InputHelper.readString("Ada Guide Baru (y/t, Lama: " + (wa.isAdaGuide() ? "y" : "t") + ", Tekan Enter untuk skip): ").trim();
+            if (!guideInput.isEmpty()) {
+                if (guideInput.equalsIgnoreCase("y")) {
+                    newGuide = true;
+                } else if (guideInput.equalsIgnoreCase("t")) {
+                    newGuide = false;
+                } else {
+                    System.out.println("Input Guide tidak valid. Menggunakan nilai lama.");
+                }
+            }
+
+            String newFasilitas = InputHelper.readStringSkipable("Fasilitas Baru", wa.getFasilitas());
 
             wa.updateSpecificData(newTingkat, newGuide, newFasilitas);
 
-        } else if (target instanceof wisataBudaya) {
-            wisataBudaya wb = (wisataBudaya) target;
-            String newBudaya = InputHelper.readStringUbahData("Budaya Utama Baru", ((wisataBudaya) target).getBudayaUtama());
-            String newBahasa = InputHelper.readStringUbahData("Bahasa Pemandu Baru", ((wisataBudaya) target).getBahasaPemandu());
-            String newKegiatan = InputHelper.readStringUbahData("Kegiatan Baru", ((wisataBudaya) target).getKegiatan());
+        } else if (target instanceof wisataBudaya wb) {
+
+            String newBudaya = InputHelper.readStringSkipable("Budaya Utama Baru", wb.getBudayaUtama());
+            String newBahasa = InputHelper.readStringSkipable("Bahasa Pemandu Baru", wb.getBahasaPemandu());
+            String newKegiatan = InputHelper.readStringSkipable("Kegiatan Baru", wb.getKegiatan());
 
             wb.updateSpecificData(newBudaya, newBahasa, newKegiatan);
         }
@@ -195,7 +245,7 @@ public class menuAdmin {
             InputHelper.pause();
             return;
         }
-        System.out.printf("ID:%-10s | %-15s | Rp %-10s | %-2s hari | %-15s | %-15s%n", "ID", "Nama Wisata", "Harga", "Durasi", "Lokasi", "Kontak");
+        System.out.printf("ID:%s | %s | Rp %s | %s hari | %s | %s%n", "ID", "Nama Wisata", "Harga", "Durasi", "Lokasi", "Kontak");
         for (paketWisata pkt : daftarPaket) {
             pkt.tampilDetail();
             System.out.println("\n");
@@ -307,14 +357,14 @@ public class menuAdmin {
         System.out.println("----------------------------------------------------------------------------------------------------------------");
 
         int ids = InputHelper.readInt("Masukkan ID Pelanggan: ");
-        pelanggan target = null;
+        pelanggan target = findPelangganById(ids);
         for (pelanggan plgg : daftarPelanggan) {
             if (plgg.getId() == ids) {
                 target = plgg;
                 break;
             }
         }
-        System.out.printf("ID:%-10s | %-15s | %-15s | %-15s%n", "ID", "Nama Pelanggan", "Kontak", "Alamat");
+        System.out.printf("ID:%s | %s | %s | %s%n", "ID", "Nama Pelanggan", "Kontak", "Alamat");
         target.tampilInfo();
         target.tampilPesanan();
     }
@@ -327,7 +377,7 @@ public class menuAdmin {
             InputHelper.pause();
             return;
         }
-        System.out.printf("ID:%-10s | %-15s | %-15s | %-15s%n", "ID", "Nama Pelanggan", "Kontak", "Alamat");
+        System.out.printf("ID:%s | %s | %s | %s%n", "ID", "Nama Pelanggan", "Kontak", "Alamat");
         for (pelanggan plg : daftarPelanggan) {
             plg.tampilInfo();
             plg.tampilPesanan();
