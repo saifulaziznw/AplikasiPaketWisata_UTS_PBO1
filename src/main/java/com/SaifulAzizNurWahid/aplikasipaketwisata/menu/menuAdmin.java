@@ -194,6 +194,7 @@ public class menuAdmin {
         System.out.printf("ID:%s | %s | %s | %s%n", "ID", "Nama Pelanggan", "Kontak", "Alamat");
         target.tampilInfo();
         target.tampilPesanan();
+        InputHelper.pause();
     }
 
     //FUNGSI UNTUK MENGECEK STATUS PESANAN DENGAN MELAKUKAN PENCARIAN MELALUI ID PESANAN TERLEBIH DAHULU

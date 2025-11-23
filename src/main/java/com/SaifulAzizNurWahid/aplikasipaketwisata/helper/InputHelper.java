@@ -29,7 +29,7 @@ public class InputHelper {
                 return input;
             } else {
                 if (skip) {
-                    return null;
+                    return "";
                 }
             }
             System.out.println("Input error! Coba lagi.");
