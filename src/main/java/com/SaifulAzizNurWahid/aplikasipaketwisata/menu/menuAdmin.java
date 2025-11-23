@@ -25,7 +25,7 @@ public class menuAdmin {
             System.out.println("4. Cari Data (Paket/Pelanggan/Status)");
             System.out.println("5. Administrasi Pelanggan dan Pesanan");
             System.out.println("6. Ubah data Paket/Pesanan");
-            System.out.println("0. Logout");
+            System.out.println("0. Keluar Aplikasi");
 
             pilih = InputHelper.readInt("Masukkan angka 0-6: ");
 
@@ -139,7 +139,7 @@ public class menuAdmin {
             System.out.println("\n===== Submenu Cari Data & Cek Status =====");
             System.out.println("1. Cari Paket Wisata berdasarkan ID");
             System.out.println("2. Cari Pelanggan & Pesanan berdasarkan ID");
-            System.out.println("3. Cek Status Pesanan berdasarkan Kode");
+            System.out.println("3. Cek Status Pesanan berdasarkan ID");
             System.out.println("0. Kembali ke Menu Utama");
 
             pilih = InputHelper.readInt("Masukkan pilihan (0-3): ");
