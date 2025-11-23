@@ -30,6 +30,10 @@ public class pelanggan {
         return nama;
     }
 
+    public List<pesanan> getDaftarPesanan() {
+        return daftarPesanan;
+    }
+
     public String getKontak() {
         return kontak;
     }
@@ -52,19 +56,22 @@ public class pelanggan {
         }
         return false;
     }
-    public void tampilInfo(){
-        System.out.printf("ID:%-10d | %-15s | 15s | %-15s%n", id, nama, kontak,alamat);
+
+    public void tampilInfo() {
+        System.out.printf("ID:%-10d | %-15s | %-15s | %-15s%n", id, nama, kontak, alamat);
     }
+
     public void tampilPesanan() {
-        System.out.printf("Pelanggan: %s (ID: %d) - Kontak: %s%n", nama, id, kontak);
-        if (daftarPesanan.isEmpty()) {
-            System.out.println("  Belum ada pesanan.");
-            return;
-        }
-        for (pesanan p : daftarPesanan) {
-            p.tampilRingkasan();
-        }
+    if (daftarPesanan.isEmpty()) {
+        System.out.println("  Belum ada pesanan.");
+        return;
     }
+    // Hapus baris System.out.printf("Pelanggan: %s (ID: %d)...")
+    System.out.println("  --- Daftar Pesanan Pelanggan ---");
+    for (pesanan p : daftarPesanan) {
+        p.tampilRingkasan();
+    }
+}
 
     public double totalPembayaran() {
         double total = 0;

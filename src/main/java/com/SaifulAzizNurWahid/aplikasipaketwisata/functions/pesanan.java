@@ -48,7 +48,13 @@ public class pesanan {
                     kodePesanan, paket.getId(), paket.getNama(), paket.getHarga(), jumlahOrang, status);
         }
     }
-
+    public void updatePesanan(int newJumlahOrang, String newStatus) {
+        if (newJumlahOrang > 0) {
+            this.jumlahOrang = newJumlahOrang;
+        }
+        this.status = newStatus;
+        System.out.println("Pesanan dengan Kode " + kodePesanan + " berhasil diperbarui.");
+    }
     public double getTotalHarga() {
         return paket != null ? paket.getHarga() * jumlahOrang : 0.0;
     }

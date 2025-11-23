@@ -6,9 +6,9 @@ public class wisataBudaya extends paketWisata {
     private String bahasaPemandu;
     private String kegiatan;
 
-    public wisataBudaya(int id, String nama, double harga, int durasiHari, String lokasi,String kontak,
+    public wisataBudaya(int id, String nama, double harga, int durasiHari, String lokasi, String kontak,
             String budayaUtama, String bahasaPemandu, String kegiatan) {
-        super(id, nama, harga, durasiHari, lokasi,kontak);
+        super(id, nama, harga, durasiHari, lokasi, kontak);
         this.budayaUtama = budayaUtama;
         this.bahasaPemandu = bahasaPemandu;
         this.kegiatan = kegiatan;
@@ -18,12 +18,19 @@ public class wisataBudaya extends paketWisata {
         return budayaUtama;
     }
 
-    public void aktivitasUtama() {
-        System.out.println("Aktivitas: tur sejarah, workshop budaya, pertunjukan.");
+    public String getBahasaPemandu() {
+        return bahasaPemandu;
     }
 
-    public boolean cocokUntukPelajar() {
-        return getDurasiHari() <= 2;
+    public String getKegiatan() {
+        return kegiatan;
+    }
+
+    public void updateSpecificData(String newBudaya, String newBahasa, String newKegiatan) {
+        this.budayaUtama = newBudaya;
+        this.bahasaPemandu = newBahasa;
+        this.kegiatan= newKegiatan;
+        System.out.println("Data spesifik Wisata Budaya berhasil diperbarui.");
     }
 
     @Override

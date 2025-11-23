@@ -6,9 +6,9 @@ public class wisataAlam extends paketWisata {
     private boolean adaGuide;
     private String fasilitas;
 
-    public wisataAlam(int id, String nama, double harga, int durasiHari, String lokasi,String kontak,
+    public wisataAlam(int id, String nama, double harga, int durasiHari, String lokasi, String kontak,
             String tingkatKesulitan, boolean adaGuide, String fasilitas) {
-        super(id, nama, harga, durasiHari, lokasi,kontak);
+        super(id, nama, harga, durasiHari, lokasi, kontak);
         this.tingkatKesulitan = tingkatKesulitan;
         this.adaGuide = adaGuide;
         this.fasilitas = fasilitas;
@@ -26,12 +26,11 @@ public class wisataAlam extends paketWisata {
         return fasilitas;
     }
 
-    public void rekomendasiPerlengkapan() {
-        System.out.println("Rekomendasi: sepatu hiking, jaket, air minum.");
-    }
-
-    public boolean cocokUntukPemula() {
-        return "mudah".equalsIgnoreCase(tingkatKesulitan);
+    public void updateSpecificData(String tingkatKesulitan, boolean adaGuide, String fasilitas) {
+        this.tingkatKesulitan = tingkatKesulitan;
+        this.adaGuide = adaGuide;
+        this.fasilitas = fasilitas;
+        System.out.println("Data spesifik Wisata Alam berhasil diperbarui.");
     }
 
     @Override
