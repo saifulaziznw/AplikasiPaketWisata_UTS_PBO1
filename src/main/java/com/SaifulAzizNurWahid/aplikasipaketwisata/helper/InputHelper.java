@@ -62,7 +62,6 @@ public class InputHelper {
             if (input.equalsIgnoreCase("y") || input.equalsIgnoreCase("t")) {
                 return input;
             }
-            // FIX KRITIS: Pesan error yang benar
             System.out.println("Input tidak valid! Harus 'y' atau 't'.");
         }
     }
