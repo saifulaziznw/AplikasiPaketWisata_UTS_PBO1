@@ -270,7 +270,7 @@ public class menuAdmin {
         String newKontak = InputHelper.readStringSkipable("Kontak Baru", target.getKontak());
 
         double newHarga = target.getHarga();
-        String hargaInput = InputHelper.readString("Harga Baru (Lama: " + target.getHarga() + ", Tekan Enter untuk skip): ").trim();
+        String hargaInput = InputHelper.readString("Harga Baru (Lama: " + target.getHarga() + ", Tekan Enter untuk skip): ",true);
         if (!hargaInput.isEmpty()) {
             try {
                 newHarga = Double.parseDouble(hargaInput);
@@ -280,7 +280,7 @@ public class menuAdmin {
         }
 
         int newDurasi = target.getDurasiHari();
-        String durasiInput = InputHelper.readString("Durasi Hari Baru (Lama: " + target.getDurasiHari() + ", Tekan Enter untuk skip): ").trim();
+        String durasiInput = InputHelper.readString("Durasi Hari Baru (Lama: " + target.getDurasiHari() + ", Tekan Enter untuk skip): ",true);
         if (!durasiInput.isEmpty()) {
             try {
                 newDurasi = Integer.parseInt(durasiInput);
@@ -293,7 +293,7 @@ public class menuAdmin {
 
         if (target instanceof wisataAlam wa) {
             String newTingkat = wa.getTingkatKesulitan();
-            String tingkatInput = InputHelper.readString("Tingkat Kesulitan Baru (Lama: " + wa.getTingkatKesulitan() + ", Ketik 'mudah'/'sedang'/'sulit' atau Enter untuk skip): ").trim();
+            String tingkatInput = InputHelper.readString("Tingkat Kesulitan Baru (Lama: " + wa.getTingkatKesulitan() + ", Ketik 'mudah'/'sedang'/'sulit' atau Enter untuk skip): ",true);
             if (!tingkatInput.isEmpty()) {
                 if (tingkatInput.equalsIgnoreCase("mudah") || tingkatInput.equalsIgnoreCase("sedang") || tingkatInput.equalsIgnoreCase("sulit")) {
                     newTingkat = tingkatInput;
@@ -303,7 +303,7 @@ public class menuAdmin {
             }
 
             boolean newGuide = wa.isAdaGuide();
-            String guideInput = InputHelper.readString("Ada Guide Baru (y/t, Lama: " + (wa.isAdaGuide() ? "y" : "t") + ", Tekan Enter untuk skip): ").trim();
+            String guideInput = InputHelper.readString("Ada Guide Baru (y/t, Lama: " + (wa.isAdaGuide() ? "y" : "t") + ", Tekan Enter untuk skip): ",true);
             if (!guideInput.isEmpty()) {
                 if (guideInput.equalsIgnoreCase("y")) {
                     newGuide = true;
